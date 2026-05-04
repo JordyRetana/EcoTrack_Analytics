@@ -118,9 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function tableRows(rows) {
+    const labels = ['Name', 'Area', 'Current', 'Trend', 'Status'];
     return rows.map((row) => `<tr>${row.map((cell, index) => {
       const css = cell === 'High' ? 'high' : cell === 'Medium' ? 'med' : 'low';
-      return `<td>${index === 3 || index === 4 ? `<mark class="${css}">${cell}</mark>` : cell}</td>`;
+      return `<td data-label="${labels[index] || 'Value'}">${index === 3 || index === 4 ? `<mark class="${css}">${cell}</mark>` : cell}</td>`;
     }).join('')}</tr>`).join('');
   }
 
@@ -159,6 +160,24 @@ document.addEventListener('DOMContentLoaded', () => {
       button.onclick = () => flash(button, 'CSV ready');
     });
 
+    document.querySelectorAll('.topbar span').forEach((icon, index) => {
+      icon.style.cursor = 'pointer';
+      icon.onclick = () => toast(index === 0 ? '3 alertas ambientales revisadas' : 'Centro de ayuda abierto');
+    });
+
+    document.querySelectorAll('.recommendations div, .recommendations a').forEach((item) => {
+      item.style.cursor = 'pointer';
+      item.onclick = () => toast('Recomendacion marcada para seguimiento');
+    });
+
+    document.querySelectorAll('tbody tr').forEach((row) => {
+      row.onclick = () => {
+        document.querySelectorAll('tbody tr').forEach((item) => item.classList.remove('selected-row'));
+        row.classList.add('selected-row');
+        toast(`Seleccionado: ${row.cells[0]?.textContent || 'registro'}`);
+      };
+    });
+
     document.querySelector('[data-reset]')?.addEventListener('click', () => {
       if (search) search.value = '';
       if (filter) filter.value = 'All status';
@@ -183,6 +202,18 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       button.textContent = original;
     }, 1200);
+  }
+
+  function toast(message) {
+    let box = document.querySelector('.toast');
+    if (!box) {
+      box = document.createElement('div');
+      box.className = 'toast';
+      document.body.appendChild(box);
+    }
+    box.textContent = message;
+    box.classList.add('show');
+    setTimeout(() => box.classList.remove('show'), 1800);
   }
 
   function animateCards() {
