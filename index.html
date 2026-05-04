@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EcoTrack Analytics</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <aside class="sidebar" aria-label="Navegacion principal">
+      <div class="brand">
+        <span class="brand-mark">ET</span>
+        <div>
+          <strong>EcoTrack</strong>
+          <small>Analytics</small>
+        </div>
+      </div>
+      <nav>
+        <a class="active" href="#dashboard">Dashboard</a>
+        <a href="#emisiones">Emisiones</a>
+        <a href="#energia">Energia</a>
+        <a href="#proveedores">Proveedores</a>
+        <a href="#reportes">Reportes</a>
+      </nav>
+      <div class="mini-status">
+        <span></span>
+        Datos sincronizados
+      </div>
+      <div class="sidebar-card">
+        <span>Meta anual</span>
+        <strong>-18% CO2e</strong>
+        <div class="goal-meter"><i></i></div>
+        <p>La empresa va 71% hacia su objetivo de reduccion.</p>
+      </div>
+    </aside>
+
+    <main class="shell">
+      <header class="hero-panel">
+        <div>
+          <p class="eyebrow">Sostenibilidad operacional</p>
+          <h1>Panel ejecutivo de huella ambiental</h1>
+          <p class="hero-copy">
+            Monitoreo de emisiones, consumo energetico y riesgo de proveedores para decisiones ESG con datos claros.
+          </p>
+        </div>
+        <div class="hero-score">
+          <span>ESG health score</span>
+          <strong id="healthScore">86</strong>
+          <small>+12 pts vs periodo anterior</small>
+        </div>
+      </header>
+
+      <section class="control-strip" aria-label="Filtros de tablero">
+        <label>
+          Sede
+          <select id="siteFilter" aria-label="Filtrar sede">
+            <option value="all">Todas las sedes</option>
+            <option value="San Jose">San Jose</option>
+            <option value="Heredia">Heredia</option>
+            <option value="Cartago">Cartago</option>
+          </select>
+        </label>
+        <label>
+          Periodo
+          <select id="periodFilter" aria-label="Filtrar periodo">
+            <option value="2026">2026</option>
+            <option value="2025">2025</option>
+          </select>
+        </label>
+        <button id="exportBtn" type="button">Exportar CSV</button>
+      </section>
+
+      <section class="kpis" id="dashboard" aria-label="Indicadores principales">
+        <article class="metric">
+          <span>CO2e acumulado</span>
+          <strong id="co2Kpi">0 t</strong>
+          <small id="co2Trend">Calculando</small>
+        </article>
+        <article class="metric">
+          <span>Energia renovable</span>
+          <strong id="renewableKpi">0%</strong>
+          <small>Participacion del consumo total</small>
+        </article>
+        <article class="metric">
+          <span>Costo evitado</span>
+          <strong id="savingKpi">$0</strong>
+          <small>Estimado por eficiencia energetica</small>
+        </article>
+        <article class="metric">
+          <span>Riesgo proveedor</span>
+          <strong id="riskKpi">0</strong>
+          <small>Contratos con alerta activa</small>
+        </article>
+      </section>
+
+      <section class="grid two-columns">
+        <article class="panel" id="emisiones">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Tendencia</p>
+              <h2>Emisiones por mes</h2>
+            </div>
+            <span id="chartLabel">Toneladas CO2e</span>
+          </div>
+          <canvas id="emissionsChart" width="900" height="420" aria-label="Grafico de emisiones"></canvas>
+        </article>
+
+        <article class="panel" id="energia">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Mix energetico</p>
+              <h2>Consumo por fuente</h2>
+            </div>
+          </div>
+          <div id="energyMix" class="mix-list"></div>
+          <div class="energy-callout">
+            <strong>Proxima mejor accion</strong>
+            <p>Migrar respaldo diesel a baterias podria bajar 4.8 t CO2e por mes.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid three-columns" aria-label="Programas activos">
+        <article class="program-card">
+          <span class="program-dot green"></span>
+          <p class="eyebrow">Programa activo</p>
+          <h3>Optimizar climatizacion</h3>
+          <p>Automatizacion de horarios HVAC en sedes con mayor consumo nocturno.</p>
+          <strong>Impacto estimado: -7.4%</strong>
+        </article>
+        <article class="program-card">
+          <span class="program-dot teal"></span>
+          <p class="eyebrow">Contrato</p>
+          <h3>Energia renovable PPA</h3>
+          <p>Negociacion con proveedor regional para cobertura estable de 36 meses.</p>
+          <strong>Ahorro proyectado: $48K</strong>
+        </article>
+        <article class="program-card">
+          <span class="program-dot amber"></span>
+          <p class="eyebrow">Riesgo</p>
+          <h3>Auditoria proveedores</h3>
+          <p>Revision de categorias logisticas con baja trazabilidad documental.</p>
+          <strong>2 alertas criticas</strong>
+        </article>
+      </section>
+
+      <section class="grid">
+        <article class="panel" id="proveedores">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Cadena de suministro</p>
+              <h2>Proveedores con mayor impacto</h2>
+            </div>
+            <input id="supplierSearch" type="search" placeholder="Buscar proveedor" />
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Proveedor</th>
+                  <th>Categoria</th>
+                  <th>CO2e</th>
+                  <th>Score ESG</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="supplierRows"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel insight-panel" id="reportes">
+          <div>
+            <p class="eyebrow">Recomendaciones</p>
+            <h2>Acciones sugeridas</h2>
+          </div>
+          <div id="insights" class="insights"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
