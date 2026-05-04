@@ -7,180 +7,53 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="ambient ambient-one"></div>
-    <div class="ambient ambient-two"></div>
-    <aside class="sidebar" aria-label="Navegacion principal">
-      <div class="brand">
-        <span class="brand-mark">ET</span>
-        <div>
-          <strong>EcoTrack</strong>
-          <small>Analytics</small>
-        </div>
-      </div>
+    <aside class="sidebar">
+      <div class="brand"><span>↻</span><div><strong>EcoTrack</strong><small>Analytics</small></div></div>
       <nav>
-        <a class="active" href="#dashboard">Dashboard</a>
-        <a href="#emisiones">Emisiones</a>
-        <a href="#energia">Energia</a>
-        <a href="#proveedores">Proveedores</a>
-        <a href="#reportes">Reportes</a>
+        <a class="active">⌂ Overview</a><a>♨ Emissions</a><a>ϟ Energy</a><a>▣ Suppliers</a><a>▥ Facilities</a><a>▤ Reports</a><a>◎ Targets</a><a>♧ Alerts</a><a>⚙ Settings</a>
       </nav>
-      <div class="mini-status">
-        <span></span>
-        Datos sincronizados
-      </div>
-      <div class="sidebar-card">
-        <span>Meta anual</span>
-        <strong>-18% CO2e</strong>
-        <div class="goal-meter"><i></i></div>
-        <p>La empresa va 71% hacia su objetivo de reduccion.</p>
-      </div>
+      <div class="source"><p>Data Source</p><strong><i></i>Connected</strong><span>Last update: 10:24 AM<br />May 24, 2025</span></div>
     </aside>
-
-    <main class="shell">
-      <header class="hero-panel">
-        <div>
-          <p class="eyebrow">Sostenibilidad operacional</p>
-          <h1>Panel ejecutivo de huella ambiental</h1>
-          <p class="hero-copy">
-            Monitoreo de emisiones, consumo energetico y riesgo de proveedores para decisiones ESG con datos claros.
-          </p>
-        </div>
-        <div class="hero-score">
-          <span>ESG health score</span>
-          <strong id="healthScore">86</strong>
-          <small>+12 pts vs periodo anterior</small>
-        </div>
+    <main class="app">
+      <header class="topbar">
+        <h1>Overview</h1>
+        <div class="actions"><button>▣ Apr 1 – Apr 30, 2025⌄</button><button>All Facilities⌄</button><button class="export">⇩ Export CSV</button><span>♧</span><span>?</span><b>EA</b></div>
       </header>
-
-      <section class="control-strip" aria-label="Filtros de tablero">
-        <label>
-          Sede
-          <select id="siteFilter" aria-label="Filtrar sede">
-            <option value="all">Todas las sedes</option>
-            <option value="San Jose">San Jose</option>
-            <option value="Heredia">Heredia</option>
-            <option value="Cartago">Cartago</option>
-          </select>
-        </label>
-        <label>
-          Periodo
-          <select id="periodFilter" aria-label="Filtrar periodo">
-            <option value="2026">2026</option>
-            <option value="2025">2025</option>
-          </select>
-        </label>
-        <button id="exportBtn" type="button">Exportar CSV</button>
+      <section class="kpis">
+        <article><i class="ico green">CO₂</i><span>CO2e<small>Total Emissions</small></span><strong>1,248 <em>tCO2e</em></strong><p>-8.2% vs Mar 1 – Mar 31</p></article>
+        <article><i class="ico blue">↗</i><span>CO2e<small>Intensity</small></span><strong>2.45 <em>tCO2e / $M</em></strong><p>-5.6% vs Mar 1 – Mar 31</p></article>
+        <article><i class="ico amber">ϟ</i><span>Energy<small>Renewable</small></span><strong>62%</strong><p>+4.3 pp vs Mar 1 – Mar 31</p></article>
+        <article><i class="ico purple">◎</i><span>CO2e<small>vs Target</small></span><strong>-12%</strong><p>On track</p></article>
+        <article><i class="ico teal">▥</i><span>Facilities<small>Reporting</small></span><strong>8 <em>/ 10</em></strong><p>80% coverage</p></article>
       </section>
-
-      <section class="kpis" id="dashboard" aria-label="Indicadores principales">
-        <article class="metric">
-          <span>CO2e acumulado</span>
-          <strong id="co2Kpi">0 t</strong>
-          <small id="co2Trend">Calculando</small>
-        </article>
-        <article class="metric">
-          <span>Energia renovable</span>
-          <strong id="renewableKpi">0%</strong>
-          <small>Participacion del consumo total</small>
-        </article>
-        <article class="metric">
-          <span>Costo evitado</span>
-          <strong id="savingKpi">$0</strong>
-          <small>Estimado por eficiencia energetica</small>
-        </article>
-        <article class="metric">
-          <span>Riesgo proveedor</span>
-          <strong id="riskKpi">0</strong>
-          <small>Contratos con alerta activa</small>
-        </article>
-      </section>
-
-      <section class="grid two-columns">
-        <article class="panel" id="emisiones">
-          <div class="panel-header">
-            <div>
-              <p class="eyebrow">Tendencia</p>
-              <h2>Emisiones por mes</h2>
-            </div>
-            <span id="chartLabel">Toneladas CO2e</span>
-          </div>
-          <canvas id="emissionsChart" width="900" height="420" aria-label="Grafico de emisiones"></canvas>
-        </article>
-
-        <article class="panel" id="energia">
-          <div class="panel-header">
-            <div>
-              <p class="eyebrow">Mix energetico</p>
-              <h2>Consumo por fuente</h2>
-            </div>
-          </div>
-          <div id="energyMix" class="mix-list"></div>
-          <div class="energy-callout">
-            <strong>Proxima mejor accion</strong>
-            <p>Migrar respaldo diesel a baterias podria bajar 4.8 t CO2e por mes.</p>
+      <section class="dashboard-grid">
+        <article class="panel chart-panel">
+          <div class="panel-head"><h2>Emissions Over Time</h2><div><button>tCO2e⌄</button><button>Monthly⌄</button></div></div>
+          <div class="legend"><span class="s1"></span>Scope 1 <span class="s2"></span>Scope 2 <span class="s3"></span>Scope 3 <span class="line"></span>Total</div>
+          <div class="bar-chart">
+            <div style="--a:46%;--b:32%;--c:26%"><span></span><b>Nov 2024</b></div>
+            <div style="--a:42%;--b:30%;--c:22%"><span></span><b>Dec 2024</b></div>
+            <div style="--a:40%;--b:31%;--c:25%"><span></span><b>Jan 2025</b></div>
+            <div style="--a:39%;--b:30%;--c:24%"><span></span><b>Feb 2025</b></div>
+            <div style="--a:43%;--b:31%;--c:26%"><span></span><b>Mar 2025</b></div>
+            <div style="--a:41%;--b:30%;--c:23%"><span></span><b>Apr 2025</b></div>
           </div>
         </article>
-      </section>
-
-      <section class="grid three-columns" aria-label="Programas activos">
-        <article class="program-card">
-          <span class="program-dot green"></span>
-          <p class="eyebrow">Programa activo</p>
-          <h3>Optimizar climatizacion</h3>
-          <p>Automatizacion de horarios HVAC en sedes con mayor consumo nocturno.</p>
-          <strong>Impacto estimado: -7.4%</strong>
+        <article class="panel donut-panel"><h2>Emissions by Scope</h2><div class="donut"><strong>1,248<small>tCO2e</small></strong></div><p><span class="s1"></span>Scope 1 <b>320 (26%)</b></p><p><span class="s2"></span>Scope 2 <b>468 (37%)</b></p><p><span class="s3"></span>Scope 3 <b>460 (37%)</b></p></article>
+        <article class="panel recommendations"><h2>Recommendations</h2><div><i>▥</i><strong>Energy Efficiency</strong><p>Upgrade HVAC systems in Building A and C.</p><small>High Impact</small></div><div><i>▱</i><strong>Supplier Engagement</strong><p>Work with high-risk suppliers to reduce emissions.</p><small class="medium">Medium Impact</small></div><div><i>ϟ</i><strong>Renewable Energy</strong><p>Increase renewable energy purchase to meet target.</p><small>High Impact</small></div><div><i>▥</i><strong>Reporting Coverage</strong><p>Add 2 more facilities to improve data coverage.</p><small class="low">Low Impact</small></div><a>View all recommendations →</a></article>
+        <article class="panel supplier-table">
+          <div class="panel-head"><h2>Supplier Risk Overview</h2><div><button>Risk: All⌄</button><input placeholder="Search suppliers..." /></div></div>
+          <table><thead><tr><th>Supplier</th><th>Category</th><th>Spend ($)</th><th>CO2e (t)</th><th>Risk</th><th>Trend</th><th>Last Assessment</th></tr></thead><tbody>
+            <tr><td>Global Metals Co.</td><td>Raw Materials</td><td>$2,154,000</td><td>312</td><td><mark class="high">High</mark></td><td class="spark red"></td><td>Apr 20, 2025</td></tr>
+            <tr><td>GreenPack Solutions</td><td>Packaging</td><td>$1,125,000</td><td>145</td><td><mark class="med">Medium</mark></td><td class="spark orange"></td><td>Apr 18, 2025</td></tr>
+            <tr><td>TransLogix</td><td>Logistics</td><td>$980,000</td><td>132</td><td><mark class="med">Medium</mark></td><td class="spark orange"></td><td>Apr 15, 2025</td></tr>
+            <tr><td>EcoEnergy Supplies</td><td>Energy</td><td>$850,000</td><td>98</td><td><mark class="low">Low</mark></td><td class="spark green"></td><td>Apr 10, 2025</td></tr>
+            <tr><td>Office Essentials</td><td>Other</td><td>$420,000</td><td>45</td><td><mark class="low">Low</mark></td><td class="spark green"></td><td>Apr 8, 2025</td></tr>
+          </tbody></table>
         </article>
-        <article class="program-card">
-          <span class="program-dot teal"></span>
-          <p class="eyebrow">Contrato</p>
-          <h3>Energia renovable PPA</h3>
-          <p>Negociacion con proveedor regional para cobertura estable de 36 meses.</p>
-          <strong>Ahorro proyectado: $48K</strong>
-        </article>
-        <article class="program-card">
-          <span class="program-dot amber"></span>
-          <p class="eyebrow">Riesgo</p>
-          <h3>Auditoria proveedores</h3>
-          <p>Revision de categorias logisticas con baja trazabilidad documental.</p>
-          <strong>2 alertas criticas</strong>
-        </article>
-      </section>
-
-      <section class="grid">
-        <article class="panel" id="proveedores">
-          <div class="panel-header">
-            <div>
-              <p class="eyebrow">Cadena de suministro</p>
-              <h2>Proveedores con mayor impacto</h2>
-            </div>
-            <input id="supplierSearch" type="search" placeholder="Buscar proveedor" />
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Proveedor</th>
-                  <th>Categoria</th>
-                  <th>CO2e</th>
-                  <th>Score ESG</th>
-                  <th>Estado</th>
-                </tr>
-              </thead>
-              <tbody id="supplierRows"></tbody>
-            </table>
-          </div>
-        </article>
-
-        <article class="panel insight-panel" id="reportes">
-          <div>
-            <p class="eyebrow">Recomendaciones</p>
-            <h2>Acciones sugeridas</h2>
-          </div>
-          <div id="insights" class="insights"></div>
-        </article>
+        <article class="panel quality"><h2>Data Quality</h2><div class="quality-ring">92%<small>Good</small></div><ul><li>Activity Data <b>95%</b></li><li>Emissions Factors <b>90%</b></li><li>Supplier Data <b>91%</b></li><li>Facility Data <b>93%</b></li></ul></article>
       </section>
     </main>
-
     <script src="app.js"></script>
   </body>
 </html>
